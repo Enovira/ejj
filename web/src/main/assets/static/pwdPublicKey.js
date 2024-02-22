@@ -1,0 +1,3 @@
+export default {
+  publicKey: "04b721d366f2f662e5a9b51abec26fa79c2d95f70bc4a3b5b0ce6b5d5dc8c6d22eff8d14f2f78bbd9f74ccfb9635863b025b7dee484e13b1285ccedf1143c32aa7"
+};

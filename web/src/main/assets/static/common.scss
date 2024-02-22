@@ -1,0 +1,300 @@
+// page {
+// 	font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+// }
+@for $i from 0 through 100 {
+	.w-#{$i} {
+		width: $i + '%';
+	}
+	.h-#{$i} {
+		height: $i + '%';
+	}
+	.padding-#{$i} {
+		padding: $i + rpx;
+	}
+	.padding-left-#{$i} {
+		padding-left: $i + rpx;
+	}
+	.padding-right-#{$i} {
+		padding-right: $i + rpx;
+	}
+	.padding-top-#{$i} {
+		padding-top: $i + rpx;
+	}
+	.padding-bottom-#{$i} {
+		padding-bottom: $i + rpx;
+	}
+	.margin-#{$i} {
+		margin: $i + rpx;
+	}
+	.margin-left-#{$i} {
+		margin-left: $i + rpx;
+	}
+	.margin-right-#{$i} {
+		margin-right: $i + rpx;
+	}
+	.margin-top-#{$i} {
+		margin-top: $i + rpx;
+	}
+	.margin-bottom-#{$i} {
+		margin-bottom: $i + rpx;
+	}
+}
+.d-table {
+	
+	display: table;
+	width: 100%;
+	vertical-align: middle;
+	text-align: center;
+	table-layout: fixed;
+	font-size: 11rpx;
+	word-break: break-all;
+	background-color: white;
+	border-collapse: collapse;
+	&.primary {
+		&.dark {
+			.d-thead {
+				background-color: #2b85e4;
+			}
+		}
+		&.disabled {
+			.d-thead {
+				background-color: #a0cfff;
+			}
+		}
+		&.light {
+			.d-thead {
+				background-color: #ecf5ff;
+			}
+		}
+		.d-thead {
+			background-color: #2979ff;
+			color: #fff;
+		}
+	}
+	&.success {
+		&.dark {
+			.d-thead {
+				background-color: #18b566;
+			}
+		}
+		&.disabled {
+			.d-thead {
+				background-color: #71d5a1;
+			}
+		}
+		&.light {
+			.d-thead {
+				background-color: #dbf1e1;
+			}
+		}
+		.d-thead {
+			background-color: #19be6b;
+			color: #fff;
+		}
+	}
+	&.warning {
+		&.dark {
+			.d-thead {
+				background-color: #f29100;
+			}
+		}
+		&.disabled {
+			.d-thead {
+				background-color: #fcbd71;
+			}
+		}
+		&.light {
+			.d-thead {
+				background-color: #fdf6ec;
+			}
+		}
+		.d-thead {
+			background-color: #ff9900;
+			color: #fff;
+		}
+	}
+	&.danger {
+		&.dark {
+			.d-thead {
+				background-color: #dd6161;
+			}
+		}
+		&.disabled {
+			.d-thead {
+				background-color: #fab6b6;
+			}
+		}
+		&.light {
+			.d-thead {
+				background-color: #fef0f0;
+			}
+		}
+		.d-thead {
+			background-color: #fa3534;
+			color: #fff;
+		}
+	}
+	&.info {
+		&.dark {
+			.d-thead {
+				background-color: #82848a;
+			}
+		}
+		&.disabled {
+			.d-thead {
+				background-color: #c8c9cc;
+			}
+		}
+		&.light {
+			.d-thead {
+				background-color: #f4f4f5;
+			}
+		}
+		.d-thead {
+			background-color: #909399;
+			color: #fff;
+		}
+	}
+	&.gray {
+		.d-thead {
+			background-color: #aaa;
+			color: #fff;
+		}
+	}
+	&.border-under {
+		.d-td,
+		.d-th {
+			@extend .noBorder;
+		}
+		.d-tr {
+			@extend .border-bottom;
+		}
+		.d-table {
+			.d-tr {
+				@extend .noBorder;
+			}
+		}
+	}
+	&.large {
+		.d-td,
+		.d-th {
+			height: 80rpx;
+		}
+	}
+	&.middle {
+		.d-td,
+		.d-th {
+			height: 60rpx;
+		}
+	}
+	.d-td,
+	.d-th {
+		@extend .border;
+	}
+	.d-table {
+		height: 100%;
+		.d-td,
+		.d-th {
+			@extend .noBorder;
+		}
+		// .d-tr {
+		// 	&:first-child {
+		// 		.d-td{
+		// 			&.border-bottom {
+		// 				border-bottom: none;
+		// 			}
+		// 			&.border-top {
+		// 				border-top: none;
+		// 			}
+		// 		}
+		// 	}
+		// }
+	}
+	input.borderInput {
+		border: 1px solid #ccc;
+		border-radius: 6rpx;
+		width: 80%;
+		height: 80%;
+		display: inline-flex;
+	}
+}
+.d-caption {
+	display: table-caption;
+	background-color: inherit;
+}
+.d-thead {
+	display: table-header-group;
+	font-weight: 600;
+}
+.d-tbody {
+	display: table-row-group;
+}
+.d-tfoot {
+	display: table-footer-group;
+}
+.d-tr {
+	display: table-row;
+	width: 100%;
+}
+.d-td,
+.d-th {
+	display: table-cell;
+	vertical-align: middle;
+	height: 30rpx;
+	font-size: 11rpx;
+	color: #333333;
+}
+.d-th {
+	background-color: #F6F7F9;
+	font-weight: 600;
+}
+.border-top {
+	border-top: 1px solid #efefef !important;
+}
+.border-left {
+	border-left: 1px solid #efefef !important;
+}
+.border-bottom {
+	border-bottom: 1px solid #efefef !important;
+}
+.border-right {
+	border-right: 1px solid #efefef !important;
+}
+.border {
+	border: 1px solid #efefef;
+}
+.noBorder {
+	border: 0;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	&-wrap {
+		flex-wrap: wrap;
+	}
+	&-nowrap {
+		flex-wrap: nowrap;
+	}
+	&-direction {
+		flex-direction: column;
+	}
+}
+
+@each $type in center, space-between, space-around, flex-start, flex-end {
+	.row-#{$type} {
+		justify-content: $type;
+	}
+}
+
+@each $type in center, stretch, flex-start, flex-end {
+	.col-#{$type} {
+		align-items: $type;
+	}
+}
+
+@each $type in center, left, right {
+	.text-#{$type} {
+		text-align: $type!important;
+	}
+}

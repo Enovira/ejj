@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">e基建辅助程序</string>
+    <string name="opened">已开启</string>
+    <string name="closed">已关闭</string>
+    <string name="connectState">连接状态:%s</string>
+</resources>

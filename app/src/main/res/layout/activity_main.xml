@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.yxh.ejj.mvvm.vm.MainActivityVM" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:alignItems="center"
+            app:flexDirection="column"
+            app:flexWrap="nowrap"
+            app:justifyContent="center"
+            tools:context=".mvvm.view.MainActivity">
+
+            <Button
+                android:id="@+id/toChatActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:onClick="@{vm.onClick}"
+                android:text="toChatActivity" />
+
+            <Button
+                android:id="@+id/toSerialPortActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:onClick="@{vm.onClick}"
+                android:text="toSerialPortActivity" />
+
+            <Button
+                android:id="@+id/startService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onClick}"
+                android:text="启动服务" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/discoveryBle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{vm.onClick}"
+                    android:text="搜索蓝牙" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/state"
+                    android:layout_marginStart="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/connectState"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <Button
+                android:id="@+id/stopScan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onClick}"
+                android:text="停止搜索" />
+
+            <Button
+                android:id="@+id/disconnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onClick}"
+                android:text="断开连接" />
+
+            <Button
+                android:id="@+id/sendMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:onClick="@{vm.onClick}"
+                android:text="写入数据" />
+
+            <Button
+                android:id="@+id/stopService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onClick}"
+                android:text="停止服务" />
+
+            <Button
+                android:id="@+id/sendAcquireCommand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:onClick="@{vm.onClick}"
+                android:text="发送so采集命令" />
+
+            <Button
+                android:id="@+id/bonded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{vm.onClick}"
+                android:text="已配对设备" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/white"
+            android:id="@+id/leftRV"
+            android:layout_width="300dp"
+            android:layout_gravity="start"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/white"
+            android:id="@+id/rightRv"
+            android:layout_width="300dp"
+            android:layout_gravity="end"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="match_parent" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
