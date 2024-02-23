@@ -8,6 +8,7 @@ import com.yxh.ejj.bean.SocketConfig
 class EventViewModel: ViewModel() {
     var socketMessage = MutableLiveData<ByteArray>()
     var socketConfig = MutableLiveData<SocketConfig>()
+    val instrumentDataCodeIncludeChinese = MutableLiveData<Boolean>()
     val bluetoothEvent = BluetoothEvent()
 
     class BluetoothEvent: ViewModel() {

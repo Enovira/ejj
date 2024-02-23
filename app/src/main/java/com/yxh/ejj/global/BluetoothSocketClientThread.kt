@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothSocket
 import com.yxh.ejj.DeviceCommunicationJNI
 import com.yxh.ejj.bean.WebSocketRequestPacket
 import com.yxh.ejj.utils.NRCodeUtil
+import com.yxh.ejj.utils.ProtocolPacketParsedUtils
 import com.yxh.ejj.utils.tryRead
 import java.io.InputStream
 import java.io.OutputStream
@@ -44,16 +45,13 @@ class BluetoothSocketClientThread(
                         resultArray = subArray
                     }
                     WebSocketRequestPacket.setSourceResult(NRCodeUtil.bytes2HexString(resultArray))
-                    val dataForLib = String(resultArray, StandardCharsets.UTF_8)
-                    //返回的报文以"0101"开头、以"}"结尾则属于底座返回的
-                    if (dataForLib.startsWith("0101") && dataForLib.last() == '}') {
-                        analyzeResponse(dataForLib.replaceFirst("0101", ""))
-                    //返回的国网报文协议
-                    } else if (NRCodeUtil.bytes2HexString(resultArray).startsWith("424547")) {
-                        analyzeResponse2(NRCodeUtil.bytes2HexString(resultArray))
-                    }
                     println("接收到仪器返回的报文: ${NRCodeUtil.bytes2HexString(resultArray)}")
                     println("接收到仪器返回的报文: ${String(resultArray)}")
+                    ProtocolPacketParsedUtils.dealWithByteArrayReturnedByBase(resultArray, object : (Int, String) -> Unit {
+                        override fun invoke(p1: Int, p2: String) {
+                            listener.invoke(2, p2)
+                        }
+                    })
                 }
             }
         } catch (e: Exception) {

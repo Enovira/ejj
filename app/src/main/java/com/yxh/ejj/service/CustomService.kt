@@ -15,10 +15,13 @@ import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import com.blankj.utilcode.util.GsonUtils
+import com.blankj.utilcode.util.LogUtils
 import com.google.gson.Gson
 import com.yxh.ejj.App
 import com.yxh.ejj.DeviceCommunicationJNI
 import com.yxh.ejj.R
+import com.yxh.ejj.bean.protocol.ProtocolForSoLibraryCommandPacket
 import com.yxh.ejj.bean.RequestMessagePacketFromDeviceSo
 import com.yxh.ejj.bean.TestResultRequest
 import com.yxh.ejj.bean.TestResultRequestData
@@ -31,6 +34,7 @@ import com.yxh.ejj.receiver.BluetoothBroadcastReceiver
 import com.yxh.ejj.utils.BluetoothUtil
 import com.yxh.ejj.utils.CustomNetworkUtil
 import com.yxh.ejj.utils.NRCodeUtil
+import com.yxh.ejj.utils.ProtocolPacketParsedUtils
 
 class CustomService : Service() {
 
@@ -102,9 +106,13 @@ class CustomService : Service() {
                     bluetoothSocketClientThread?.sendMessage(randomString(20))
                 }
                 ConstantStore.COMMAND_SEND_ACQUIRE_COMMAND -> {
-                    getAcquireCommandInstrumentModel()?.let { command ->
+                    ProtocolPacketParsedUtils.getAcquireCommandInstrumentModel()?.let { command ->
+                        if (command == "fail") {
+                            webSocketServerThread?.sendErrorMessage("从so库获取采集命令失败")
+                        } else {
 //                        BleUtil.sendData(command)
-                        bluetoothSocketClientThread?.sendMessage(command)
+                            bluetoothSocketClientThread?.sendMessage(command)
+                        }
                     }
                 }
                 ConstantStore.COMMAND_CONNECT_DEVICE -> {
@@ -150,7 +158,7 @@ class CustomService : Service() {
                     WebSocketRequestPacket.setInstrument(response.instrument)
                     WebSocketRequestPacket.setInstrumentInfo(it)
                     response.instrument.let { instrumentModel ->
-                        getAcquireCommandInstrumentModel(instrumentModel)?.let { requireDataCommand ->
+                        ProtocolPacketParsedUtils.getAcquireCommandInstrumentModel(instrumentModel, baud = response.baud)?.let { requireDataCommand ->
                             if (requireDataCommand == "fail") {
                                 webSocketServerThread?.sendErrorMessage("从so库获取采集命令失败")
                                 return@WebSocketServerThread
@@ -248,21 +256,6 @@ class CustomService : Service() {
         intentFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
         intentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
         registerReceiver(receiver, intentFilter)
-    }
-
-    /**
-     * @param baud 波特率
-     * @param count 第几次请求
-     * @param isLast 是否最后一次
-     * */
-    private fun getAcquireCommandInstrumentModel(instrument: String? = "JYR_40S", baud: Int = 9600, count: Int = 1, isLast: Boolean = false): String? {
-        val resultRequestData = TestResultRequestData()
-        resultRequestData.deviceCode = instrument
-        resultRequestData.comMode = "rs232"
-        resultRequestData.baud = baud
-        val request = TestResultRequest(resultRequestData, 1)
-        println(Gson().toJson(request))
-        return DeviceCommunicationJNI.InterfaceJsonMagLoading(Gson().toJson(request), count, baud)
     }
 
     private fun randomString(size: Int): String {
